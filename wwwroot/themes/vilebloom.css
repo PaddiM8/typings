@@ -15,7 +15,7 @@ body {
   background-image: -ms-linear-gradient(135deg, #cd6c8f 50%, #34657f 50%);
 }
 
-#header {
+header {
   color: #ffffff;
 }
 
@@ -49,7 +49,7 @@ body {
   color: #cd6c8f;
 }
 
-#footer {
+footer {
   color: #ffffff;
 }
 

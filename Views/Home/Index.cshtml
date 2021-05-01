@@ -1,7 +1,7 @@
 @{
     ViewData["Title"] = "typings";
 }
-<div id="command-center" class="">
+<main id="command-center">
     <div class="bar">
         <div id="left-wing">
             <span id="word-count">
@@ -37,14 +37,5 @@
             <button id="redo-button" onclick="setText(event)" tabindex="2">redo</button>
         </div>
     </div>
-</div>
-<div id="theme-center" class="hidden">
-    <div id="left-wing" onClick="hideThemeCenter();">
-        &lt; back</div>
-    <div id="theme-area"></div>
-</div>
-<div id="footer">
-    <a href="https://github.com/briano1905/typings#typings" target="_blank" tabindex="3">user guide</a>/
-    <div id="show-themes" class="button" onClick="showThemeCenter();" tabindex="4">themes</div>
-</div>
+</main>
 <script src="main.js"></script>

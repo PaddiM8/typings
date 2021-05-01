@@ -8,11 +8,15 @@ body {
   align-items: center;
   justify-content: space-between;
   font-family: Roboto Mono;
-  line-height: 1.6rem;
 }
 
 *[onclick] {
   cursor: pointer;
+}
+
+h1 > a {
+  color: inherit;
+  text-decoration: inherit;
 }
 
 .bar {
@@ -20,13 +24,33 @@ body {
   justify-content: space-between;
 }
 
-#header {
-  margin: 0;
-  margin: 1.2rem 0 0 0;
-  line-height: 2rem;
+header {
+  width: 50vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: auto;
 }
 
-#command-center {
+footer, header nav {
+  font-size: 1.3em;
+}
+
+header h1 {
+  transform: translateX(-50%);
+}
+
+header nav {
+  margin-left: auto;
+  margin-right: 2rem;
+}
+
+header nav > a {
+  color: inherit;
+  text-decoration: none;
+}
+
+main {
   margin: 0 0.4rem;
   width: 100%;
   max-width: 40rem;
@@ -36,7 +60,30 @@ body {
   transform: translateY(-2vh);
 }
 
-#theme-area{
+main.login, main.register {
+  width: 20rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form input[type="submit"] {
+  width: auto;
+  margin-right: auto;
+}
+
+.error {
+  color: red;
+}
+
+form .error {
+  font-size: 0.8em;
+  margin-bottom: 0.5rem;
+}
+
+#theme-area {
   margin-top: 1rem;
   padding: 1.4rem 1rem;
   border-radius: 0.4rem;
@@ -46,7 +93,7 @@ body {
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-#theme-center{
+#theme-center {
   margin: 0 0.4rem;
   width: 100%;
   max-width: 40rem;
@@ -56,7 +103,7 @@ body {
   transform: translateY(-2vh);
 }
 
-.theme-button{
+.theme-button {
   padding: 1rem 0;
   background: gray;
   border-radius: 0.4rem;
@@ -64,7 +111,7 @@ body {
   font-size: .8rem;
 }
 
-.theme-button:hover{
+.theme-button:hover {
   cursor: pointer;
   box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.2);
 }
@@ -104,31 +151,31 @@ body {
   cursor: pointer;
 }
 
-#footer {
+footer {
   margin-bottom: 1.2rem;
   display: flex;
 }
 
-#footer *{
+footer * {
   text-decoration: none;
   margin: 0 .5rem;
   color: inherit;
 }
 
-#footer .button{
+footer .button {
   cursor: pointer;
 }
 
-#footer a:visited{
+footer a:visited {
   color: unset;
 }
 
-.hidden{ 
+.hidden {
   display: none !important;
 }
 
-body, #header, #left-wing, #right-wing, #typing-area, #theme-area, #theme-center,
-#text-display, #redo-button, #footer, #highlight {
+body, header, #left-wing, #right-wing, #typing-area, #theme-area, #theme-center,
+#text-display, #redo-button, footer, #highlight {
   transition: all .4s ease-in-out 0s;
 
 }

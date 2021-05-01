@@ -16,7 +16,7 @@ body {
   }
 }
 
-#header {
+header {
   color: #fafafa;
 }
 
@@ -51,7 +51,7 @@ body {
   color: #1a1a1a;
 }
 
-#footer {
+footer {
   color: #fafafa;
 }
 

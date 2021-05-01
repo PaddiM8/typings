@@ -13,7 +13,24 @@
 </head>
 
 <body>
-    <h2 id="header">@ViewData["Title"]</h2>
+    <header>
+        <h1 class="title"><a asp-controller="Home" asp-action="Index">typings</a></h1>
+        <nav>
+            <a asp-controller="Account" asp-action="Login">Login</a>
+            /
+            <a asp-controller="Account" asp-action="Register">Register</a>
+        </nav>
+    </header>
+    @RenderBody()
+    <div id="theme-center" class="hidden">
+        <div id="left-wing" onClick="hideThemeCenter();">
+            &lt; back</div>
+        <div id="theme-area"></div>
+    </div>
+    <footer>
+        <a href="https://github.com/briano1905/typings#typings" target="_blank" tabindex="3">user guide</a>/
+        <div id="show-themes" class="button" onClick="showThemeCenter();" tabindex="4">themes</div>
+    </footer>
 </body>
 
 </html>

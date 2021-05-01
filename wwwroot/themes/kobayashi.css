@@ -2,7 +2,7 @@ body {
     background: #9a876a;
 }
 
-#header {
+header {
     color: #d79e27;
 }
 
@@ -38,7 +38,7 @@ body {
     color: #f00d00;
 }
 
-#footer {
+footer {
     color: #e5e8e6;
 }
 

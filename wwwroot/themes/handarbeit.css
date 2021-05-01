@@ -17,7 +17,7 @@ body {
   background: #1a1a1a;
 }
 
-#header {
+header {
   color: #e7bac4;
 }
 
@@ -51,7 +51,7 @@ body {
   color: #fafafa;
 }
 
-#footer {
+footer {
   color: #f7782b;
 }
 

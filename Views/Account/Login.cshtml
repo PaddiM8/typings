@@ -1,0 +1,20 @@
+@{
+    ViewData["Title"] = "Login";
+    Layout = "_Layout";
+}
+
+<main class="login">
+    <h2>Login</h2>
+    @model LoginViewModel
+    <form asp-action="Login" method="post">
+        <label asp-for="Username"></label>
+        <input asp-for="Username"/>
+        <span asp-validation-for="Username" class="error"></span>
+
+        <label asp-for="Password"></label>
+        <input asp-for="Password"/>
+        <span asp-validation-for="Password" class="error"></span>
+
+        <input type="submit" value="Login"/>
+    </form>
+</main>

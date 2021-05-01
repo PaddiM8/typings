@@ -6,7 +6,7 @@ body {
   background: #282828;
 }
 
-#header {
+header {
   color: #d79921;
 }
 
@@ -40,7 +40,7 @@ body {
   color: #ebdbb2;
 }
 
-#footer {
+footer {
   color: #d79921;
 }
 

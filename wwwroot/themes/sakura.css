@@ -12,7 +12,7 @@ body {
   background: linear-gradient(-20deg, rgba(255,186,200,1) 0%, rgba(255,152,172,1) 100%);
 }
 
-#header {
+header {
   color: #fff;
 }
 
@@ -47,7 +47,7 @@ body {
   color: #fff;
 }
 
-#footer {
+footer {
   color: #fff;
 }
 
