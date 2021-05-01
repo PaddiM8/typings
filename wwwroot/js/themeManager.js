@@ -4,6 +4,7 @@ import {setCookie, getCookie} from "./cookieManager";
 //getCookie('theme') === '' ? setTheme('light') : setTheme(getCookie('theme'));
 
 export function setTheme(_theme) {
+    if (!_theme) return;
     const theme = _theme.toLowerCase();
     fetch(`/themes/${theme}.css`)
         .then(response => {
@@ -22,6 +23,9 @@ export function setTheme(_theme) {
         })
         .catch(err => console.error(err));
 }
+
+// Run it once to make sure it can be reached from HTML.
+setTheme();
 
 function showAllThemes(){
     fetch(`/themes/theme-list.json`)

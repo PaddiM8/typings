@@ -9,7 +9,6 @@
     <title>typings</title>
     <meta name="description"
         content="typings.gg is a sleek and modern typing test website. it support many custom themes" />
-    <link rel="stylesheet" href="~/style.css" />
     @if (Context.Request.Cookies.TryGetValue("theme", out var theme))
     {
         <link id="theme" rel="stylesheet" href="~/themes/@(theme).css" />
@@ -18,6 +17,7 @@
     {
         <link id="theme" rel="stylesheet" href="~/themes/light.css" />
     }
+    <link rel="stylesheet" href="~/style.css" />
 </head>
 
 <body>
