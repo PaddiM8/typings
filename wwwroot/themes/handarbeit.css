@@ -13,6 +13,12 @@ mint: #bae3ba
 teal: #007290
 */
 
+:root {
+  --primary-color: #214ab5;
+  --background-color: #bb2e17;
+  --text-color: #fafafa;
+}
+
 body {
   background: #1a1a1a;
   color: #e7bac4;

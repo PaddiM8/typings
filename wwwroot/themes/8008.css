@@ -6,6 +6,12 @@ Light Blue:  #a2aebd
 Pink:        #f44c7f
 */
 
+:root {
+  --primary-color: #f44c7f;
+  --background-color: #a2aebd;
+  --text-color: #3c4756;
+}
+
 body {
   background: #3c4756;
   color: #f44c7f;

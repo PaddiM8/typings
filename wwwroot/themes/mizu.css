@@ -5,6 +5,12 @@ dark blue: #253746
 light blue: #b9d9eb
 */
 
+:root {
+  --primary-color: #fafafa;
+  --background-color: #b9d9eb;
+  --text-color: #253746;
+}
+
 body {
   background: #253746;
   color: #fafafa;

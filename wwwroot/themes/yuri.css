@@ -6,6 +6,12 @@ navy: #293649
 light blue: #abc6dc
 */
 
+:root {
+  --primary-color: #ea4221;
+  --background-color: #abc6dc;
+  --text-color: #293649;
+}
+
 body {
   background: #293649;
   color: #ea4221;

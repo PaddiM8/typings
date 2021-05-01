@@ -10,6 +10,12 @@ yellow:     #ffd751
 orange:     #ff9552
 */
 
+:root {
+  --primary-color: #ff9552;
+  --background-color: #232533;
+  --text-color: #fafafa;
+}
+
 body {
   background: #191b25;
   color: #fafafa;

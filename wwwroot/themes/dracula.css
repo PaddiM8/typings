@@ -1,3 +1,9 @@
+:root {
+  --primary-color: #8be9fd;
+  --background-color: #44475a;
+  --text-color: #f8f8f2;
+}
+
 body {
   background: #282a36;
   color: #f8f8f2;

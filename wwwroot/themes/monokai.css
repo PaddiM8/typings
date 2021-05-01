@@ -2,6 +2,12 @@
 Colors inspired by Monokai syntax theme
 */
 
+:root {
+  --primary-color: #F92672;
+  --background-color: #272822;
+  --text-color: #F8F8F2;
+}
+
 body {
   background: #171812;
   color: #A6E22E;

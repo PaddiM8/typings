@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
 
+:root {
+  --radius: 0.4em;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -51,13 +55,27 @@ header nav > a {
 }
 
 main {
-  margin: 0 0.4rem;
   width: 100%;
+  margin: 0 0.4rem;
+  padding: 2rem;
+  border-radius: var(--radius);
+  background-color: var(--background-color);
+  color: var(--text-color);
   max-width: 40rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   transform: translateY(-2vh);
+}
+
+main h2 {
+  margin-top: 0;
+}
+
+#command-center {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
 }
 
 main.login, main.register {
@@ -88,6 +106,7 @@ main.login, main.register {
 form {
   display: flex;
   flex-direction: column;
+  padding-right: 2em;
 }
 
 form input[type="submit"] {
@@ -107,7 +126,7 @@ form .error {
 #theme-area {
   margin-top: 1rem;
   padding: 1.4rem 1rem;
-  border-radius: 0.4rem;
+  border-radius: var(--radius);
   background: #eaeaea;
   display: grid;
   grid-gap: 1rem;
@@ -126,7 +145,7 @@ form .error {
 
 .theme-button {
   padding: 1rem 0;
-  background: gray;
+  background-color: var(--primary-color);
   border-radius: 0.4rem;
   text-align: center;
   font-size: .8rem;
@@ -145,7 +164,6 @@ form .error {
   margin-top: 1rem;
   padding: 1.4rem 1rem;
   border-radius: 0.4rem;
-  background: #eaeaea;
 }
 
 #text-display {
@@ -153,23 +171,29 @@ form .error {
   overflow: hidden;
 }
 
-#input-field {
+#input-field, input[type="text"], input[type="password"], input[type="email"] {
   width: 100%;
   border: none;
   font: inherit;
   padding: 0.4rem 1rem;
   border-radius: 0.2rem;
-  font-size: 1.2rem;
+  font-size: 0.8em;
+}
+
+#redo-button, button, input[type="submit"] {
+  border: none;
+  background-color: var(--primary-color);
+  padding: 0.4rem 1rem;
+  border-radius: 0.2rem;
+
+  color: var(--text-color);
+  font: inherit;
+  font-size: 1em;
+  cursor: pointer;
 }
 
 #redo-button {
   margin-left: 0.7rem;
-  border: none;
-  font: inherit;
-  padding: 0.4rem 1rem;
-  border-radius: 0.2rem;
-  font-size: 1.2rem;
-  cursor: pointer;
 }
 
 footer {

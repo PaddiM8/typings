@@ -2,6 +2,12 @@
 Adapted from the Gruvbox theme
 */
 
+:root {
+  --primary-color: #689d6a;
+  --background-color: #1d2021;
+  --text-color: #ebdbb2;
+}
+
 body {
   background: #282828;
   color: #d79921;

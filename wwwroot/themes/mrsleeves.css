@@ -5,6 +5,12 @@ light blue: #adcff1
 light pink: #f5c7b8
 */
 
+:root {
+    --primary-color: #1a1a1a;
+    --background-color: #eaeaea;
+    --text-color: #1a1a1a;
+}
+
 body {
   background: #d4d4d4;
   color: #1a1a1a;

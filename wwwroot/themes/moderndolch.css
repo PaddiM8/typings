@@ -7,6 +7,12 @@ Red: bc5868
 Cyan: 81d8d0
 */
 
+:root {
+  --primary-color: #fafafa;
+  --background-color: #7c7e81;
+  --text-color: #fafafa;
+}
+
 body {
   background: #494b4f;
   color: #fafafa;

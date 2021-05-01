@@ -8,6 +8,12 @@ red: #d28782
 green: #6f8c70
 */
 
+:root {
+  --primary-color: #2e2f33;
+  --background-color: #d9d2c8;
+  --text-color: #2e2f33;
+}
+
 body {
   background: #b6b09a;
   color: #2e2f33;

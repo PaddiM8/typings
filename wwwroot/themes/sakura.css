@@ -8,6 +8,12 @@ light-gray: #efefef;
 brown: #917075;
 */
 
+:root {
+  --primary-color: #fff;
+  --background-color: #fff;
+  --text-color: #ff98ac;
+}
+
 body {
   background: linear-gradient(-20deg, rgba(255,186,200,1) 0%, rgba(255,152,172,1) 100%);
   color: #fff;

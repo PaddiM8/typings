@@ -6,6 +6,12 @@ yellow: #E1BA45
 brown: #5B3217
 */
 
+:root {
+  --primary-color: #e16b06;
+  --background-color: #5b3217;
+  --text-color: #5dcfb8;
+}
+
 body {
   background-color: #5dcfb8;
   background-image: linear-gradient(

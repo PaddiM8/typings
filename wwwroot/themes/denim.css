@@ -8,6 +8,12 @@ brown: #b8835f
 sand: #e3d5b9
 */
 
+:root {
+  --primary-color: #e3d5b9;
+  --background-color: #687796;
+  --text-color: #e3d5b9;
+}
+
 body {
   background: #454f63;
   color: #b8835f;

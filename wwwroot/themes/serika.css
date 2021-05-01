@@ -7,6 +7,12 @@ alphas: #f0ebd7
 alphas legends: #302f2b
 */
 
+:root {
+  --primary-color: #302f2b;
+  --background-color: #f0ebd7;
+  --text-color: #302f2b;
+}
+
 body {
   background: #ffcd00;
   color: #302f2b;
