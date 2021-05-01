@@ -2,7 +2,7 @@
 
 <a href="https://typings.gg" target="_blank">typings.gg</a> is a sleek and modern typing test website. it supports many custom themes
 
-![typings.gg](img/typings-screen-shot.png)
+![typings.gg](typings-screen-shot.png)
 
 ## theme
 
