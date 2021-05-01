@@ -1,0 +1,19 @@
+@{
+    ViewData["Title"] = "Account overview";
+    Layout = "_AccountLayout";
+}
+
+<h3>Information</h3>
+<strong>Username: </strong> Foo
+<strong>Creation date: </strong> 01/01/1970
+
+<h3>Delete account</h3>
+@model DeleteAccountViewModel
+<form asp-action="DeleteAccount" method="delete">
+    <label asp-for="Password"></label>
+    <input asp-for="Password"/>
+    <span asp-validation-for="Password" class="error"></span>
+
+    <input type="submit" value="Delete"/>
+</form>
+

@@ -1,0 +1,12 @@
+@{
+    Layout = "_Layout";
+}
+
+<main class="account">
+    <nav>
+        <a asp-action="Overview">Overview</a>
+        /
+        <a asp-action="ChangePassword">Change password</a>
+    </nav>
+    @RenderBody()
+</main>

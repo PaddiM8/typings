@@ -28,6 +28,16 @@ namespace Typings.Controllers
             return View();
         }
         
+        public IActionResult Overview()
+        {
+            return View();
+        }
+        
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+        
         [HttpPost]
         public IActionResult Login(LoginViewModel model)
         {
@@ -44,6 +54,26 @@ namespace Typings.Controllers
             _logger.LogInformation( $"Created user: {model.Username}, {model.Password}");
 
             return RedirectToAction("Index", "Home");
+
+        }
+        
+        [HttpDelete]
+        public IActionResult DeleteAccount(DeleteAccountViewModel model)
+        {
+            if (!ModelState.IsValid) return View("Overview", model);
+            _logger.LogInformation( $"Deleted account.");
+
+            return View("Overview");
+
+        }
+        
+        [HttpPost]
+        public IActionResult ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+            _logger.LogInformation( $"Changed password.");
+
+            return View();
 
         }
 
