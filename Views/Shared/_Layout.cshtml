@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Net
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,7 +10,14 @@
     <meta name="description"
         content="typings.gg is a sleek and modern typing test website. it support many custom themes" />
     <link rel="stylesheet" href="~/style.css" />
-    <link id="theme" rel="stylesheet" href="~/themes/light.css" />
+    @if (Context.Request.Cookies.TryGetValue("theme", out var theme))
+    {
+        <link id="theme" rel="stylesheet" href="~/themes/@(theme).css" />
+    }
+    else
+    {
+        <link id="theme" rel="stylesheet" href="~/themes/light.css" />
+    }
 </head>
 
 <body>
@@ -23,14 +31,23 @@
     </header>
     @RenderBody()
     <div id="theme-center" class="hidden">
-        <div id="left-wing" onClick="hideThemeCenter();">
+        <div id="left-wing" onClick="showThemeCenter(false);">
             &lt; back</div>
         <div id="theme-area"></div>
     </div>
     <footer>
         <a href="https://github.com/briano1905/typings#typings" target="_blank" tabindex="3">user guide</a>/
-        <div id="show-themes" class="button" onClick="showThemeCenter();" tabindex="4">themes</div>
+        <div id="show-themes" class="button" onClick="showThemeCenter(true);" tabindex="4">themes</div>
     </footer>
+
+    @if ((string) ViewData["Title"] == "typings")
+    {
+        <script src="~/dist/index.js"></script>
+    }
+    else
+    {
+        <script src="~/dist/common.js"></script>
+    }
 </body>
 
 </html>

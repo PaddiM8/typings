@@ -10,9 +10,6 @@ brown: #917075;
 
 body {
   background: linear-gradient(-20deg, rgba(255,186,200,1) 0%, rgba(255,152,172,1) 100%);
-}
-
-header {
   color: #fff;
 }
 

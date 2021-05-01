@@ -1,3 +1,6 @@
+import {setCookie, getCookie} from "./cookieManager";
+import {showThemeCenter, setTheme, initThemes} from "./themeManager";
+
 // Get document element
 const textDisplay = document.querySelector('#text-display');
 const inputField = document.querySelector('#input-field');
@@ -17,8 +20,10 @@ let timer;
 let timerActive = false;
 let punctuation = false;
 
+initThemes();
+showThemeCenter(false);
+
 // Get cookies
-getCookie('theme') === '' ? setTheme('light') : setTheme(getCookie('theme'));
 getCookie('language') === '' ? setLanguage('english') : setLanguage(getCookie('language'));
 getCookie('wordCount') === '' ? setWordCount(50) : setWordCount(getCookie('wordCount'));
 getCookie('timeCount') === '' ? setTimeCount(60) : setTimeCount(getCookie('timeCount'));
@@ -63,7 +68,7 @@ function setText(e) {
       textDisplay.innerHTML = '';
       if (!keepWordList) {
         wordList = [];
-        for (i = 0; i < 500; i++) {
+        for (let i = 0; i < 500; i++) {
           let n = Math.floor(Math.random() * randomWords.length);
           wordList.push(randomWords[n]);
         }
@@ -81,7 +86,7 @@ function addPunctuations() {
     wordList[0] = wordList[0][0].toUpperCase() + wordList[0].slice(1);
 
     // Add comma, fullstop, question mark, exclamation mark, semicolon. Capitalize the next word
-    for (i = 0; i < wordList.length; i++) {
+    for (let i = 0; i < wordList.length; i++) {
       const ran = Math.random();
       if (i < wordList.length - 1) {
         if (ran < 0.03) {
@@ -179,7 +184,7 @@ inputField.addEventListener('keydown', e => {
         const currentWordPosition = textDisplay.childNodes[currentWord].getBoundingClientRect();
         const nextWordPosition = textDisplay.childNodes[currentWord + 1].getBoundingClientRect();
         if (currentWordPosition.top < nextWordPosition.top) {
-          for (i = 0; i < currentWord + 1; i++) textDisplay.childNodes[i].style.display = 'none';
+          for (let i = 0; i < currentWord + 1; i++) textDisplay.childNodes[i].style.display = 'none';
         }
       }
 
@@ -228,7 +233,7 @@ function showResult() {
       words = correctKeys / 5;
       minute = timeCount / 60;
       let sumKeys = -1;
-      for (i = 0; i < currentWord; i++) {
+      for (let i = 0; i < currentWord; i++) {
         sumKeys += wordList[i].length + 1;
       }
       acc = acc = Math.min(Math.floor((correctKeys / sumKeys) * 100), 100);
@@ -261,33 +266,13 @@ document.addEventListener('keydown', e => {
     }
   } else if (!document.querySelector('#theme-center').classList.contains('hidden')) {
     if (e.key === 'Escape'){
-      hideThemeCenter();
+      showThemeCenter(false);
       inputField.focus();
     }
   } else if (e.key === 'Escape') {
     setText(e);
   }
 });
-
-function setTheme(_theme) {
-  const theme = _theme.toLowerCase();
-  fetch(`themes/${theme}.css`)
-    .then(response => {
-      if (response.status === 200) {
-        response
-          .text()
-          .then(css => {
-            setCookie('theme', theme, 90);
-            document.querySelector('#theme').setAttribute('href', `themes/${theme}.css`);
-            setText();
-          })
-          .catch(err => console.error(err));
-      } else {
-        console.log(`theme ${theme} is undefine`);
-      }
-    })
-    .catch(err => console.error(err));
-}
 
 function setLanguage(_lang) {
   const lang = _lang.toLowerCase();
@@ -308,7 +293,7 @@ function setLanguage(_lang) {
 
         setText();
       } else {
-        console.error(`language ${lang} is undefine`);
+        console.error(`language ${lang} is undefined`);
       }
     })
     .catch(err => console.error(err));
@@ -332,7 +317,7 @@ function setTypingMode(_mode) {
       setText();
       break;
     default:
-      console.error(`mode ${mode} is undefine`);
+      console.error(`mode ${mode} is undefined`);
   }
 }
 
@@ -367,93 +352,3 @@ function setTimeCount(tc) {
   document.querySelector(`#tc-${timeCount}`).style.borderBottom = '2px solid';
   setText();
 }
-
-function setCookie(cname, cvalue, exdays) {
-  var d = new Date();
-  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-  var expires = 'expires=' + d.toUTCString();
-  document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/';
-}
-
-function getCookie(cname) {
-  var name = cname + '=';
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(';');
-  for (var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return '';
-}
-
-showAllThemes();
-function showAllThemes(){
-    fetch(`themes/theme-list.json`)
-    .then(response => {
-      if (response.status === 200) {
-        response
-          .text()
-          .then(body => {
-            let themes = JSON.parse(body);
-            let keys = Object.keys(themes);
-            let i;
-            for(i = 0;i < keys.length; i ++){
-
-              let theme = document.createElement('div');
-              theme.setAttribute('class', 'theme-button');
-              theme.setAttribute('onClick', `setTheme('${keys[i]}')`);
-              theme.setAttribute('id', keys[i]);
-
-              // set tabindex to current theme index + 4 for the test page
-              theme.setAttribute('tabindex', i + 5);
-              theme.addEventListener('keydown', e => {
-                if (e.key === 'Enter') {
-                  setTheme(theme.id);
-                  inputField.focus();
-
-                }
-              })
-
-              if(themes[keys[i]]['customHTML'] != undefined){
-                theme.style.background = themes[keys[i]]['background'];
-                theme.innerHTML = themes[keys[i]]['customHTML']
-              }else{
-                theme.textContent = keys[i];
-                theme.style.background = themes[keys[i]]['background'];
-                theme.style.color = themes[keys[i]]['color'];
-              }
-              document.getElementById('theme-area').appendChild(theme);
-            }
-          })
-          .catch(err => console.error(err));
-      } else {
-        console.log(`Cant find theme-list.json`);
-      }
-    })
-    .catch(err => console.error(err));
-}
-
-// enter to open theme area
-document.getElementById('show-themes').addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    showThemeCenter();
-    inputField.focus();
-  }
-});
-
-function showThemeCenter() {
-  document.getElementById('theme-center').classList.remove('hidden');
-  document.getElementById('command-center').classList.add('hidden');
-}
-
-function hideThemeCenter() {
-  document.getElementById('theme-center').classList.add('hidden');
-  document.getElementById('command-center').classList.remove('hidden');
-}
-
-

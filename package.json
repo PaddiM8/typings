@@ -1,0 +1,22 @@
+{
+  "name": "typings",
+  "version": "1.0.0",
+  "description": "<a href=\"https://typings.gg\" target=\"_blank\">typings.gg</a> is a sleek and modern typing test website. it supports many custom themes",
+  "main": "rollup.config.js",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/briano1905/typings.git"
+  },
+  "author": "",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/briano1905/typings/issues"
+  },
+  "homepage": "https://github.com/briano1905/typings#readme",
+  "devDependencies": {
+    "rollup": "^2.46.0"
+  }
+}
