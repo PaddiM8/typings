@@ -68,6 +68,10 @@ main {
   transform: translateY(-2vh);
 }
 
+main a {
+  color: var(--primary-color);
+}
+
 main h2 {
   margin-top: 0;
 }
@@ -107,6 +111,10 @@ form {
   display: flex;
   flex-direction: column;
   padding-right: 2em;
+}
+
+form a {
+  margin-bottom: 0.8rem;
 }
 
 form input[type="submit"] {

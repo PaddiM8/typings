@@ -14,6 +14,8 @@
         <label asp-for="Password"></label>
         <input asp-for="Password"/>
         <span asp-validation-for="Password" class="error"></span>
+        
+        <a asp-action="RequestPasswordReset">Forgot password?</a>
 
         <input type="submit" value="Login"/>
     </form>

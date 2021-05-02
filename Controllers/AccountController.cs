@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Hosting.Internal;
@@ -69,6 +70,36 @@ namespace Typings.Controllers
         [AllowAnonymous]
         public IActionResult ResendConfirmationEmail()
         {
+            return View();
+        }
+        
+        [AllowAnonymous]
+        public IActionResult RequestPasswordReset()
+        {
+            return View();
+        }
+        
+        [AllowAnonymous]
+        public IActionResult PasswordResetRequested(string? userId = null, string? code = null)
+        {
+            ViewData["UserId"] = userId;
+            ViewData["Code"] = code;
+            
+            return View();
+        }
+        
+        [AllowAnonymous]
+        public IActionResult PasswordResetSuccessfully()
+        {
+            return View();
+        }
+        
+        [AllowAnonymous]
+        public IActionResult ResetPassword(string userId, string code)
+        {
+            ViewData["UserId"] = userId;
+            ViewData["Code"] = code;
+            
             return View();
         }
         
@@ -156,6 +187,7 @@ namespace Typings.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> ResendConfirmationEmail(EmailViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
@@ -182,6 +214,53 @@ namespace Typings.Controllers
             return View("Error");
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> RequestPasswordReset(EmailViewModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            var userId = await _userManager.GetUserIdAsync(user);
+            var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            if (_environment.IsProduction())
+            {
+                var callbackUrl = Url.Page(
+                    "/Account/ResetPassword",
+                    null,
+                    new { userId, code },
+                    Request.Scheme);
+                
+                await _emailSender.SendEmailAsync(user.Email, "Password reset request",
+                    $"Reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                return RedirectToAction("PasswordResetRequested");
+            }
+            
+            return RedirectToAction("PasswordResetRequested", new { userId, code });
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> ResetPassword(PasswordResetViewModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+            var user = await _userManager.FindByIdAsync(model.UserId);
+            var result = await _userManager.ResetPasswordAsync(user, model.Code, model.NewPassword);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("PasswordResetSuccessfully");
+            }
+
+            foreach (var error in result.Errors)
+            {
+                _logger.LogInformation( error.Description);
+                ModelState.AddModelError("Password", error.Description);
+            }
+
+            return View(model);
+        }
+        
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
