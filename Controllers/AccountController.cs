@@ -58,7 +58,7 @@ namespace Typings.Controllers
             var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, true, true);
             if (result.Succeeded)
             {
-                _logger.LogInformation("Logged in as {model.Username}.");
+                _logger.LogInformation($"Logged in as {model.Username}.");
                 
                 return RedirectToAction("Index", "Home");
             }
@@ -108,24 +108,61 @@ namespace Typings.Controllers
             return RedirectToAction("Index", "Home");
         }
         
-        [HttpDelete]
-        public IActionResult DeleteAccount(DeleteAccountViewModel model)
+        [HttpPost]
+        public async Task<IActionResult> DeleteAccount(DeleteAccountViewModel model)
         {
             if (!ModelState.IsValid) return View("Overview", model);
-            _logger.LogInformation( $"Deleted account.");
+            var user = await _userManager.FindByNameAsync(User.Identity!.Name);
+            
+            if (await _userManager.CheckPasswordAsync(user, model.Password))
+            {
+                await _signInManager.SignOutAsync();
+                var deletionResult = await _userManager.DeleteAsync(user);
+                if (!deletionResult.Succeeded)
+                {
+                    foreach (var error in deletionResult.Errors)
+                    {
+                        _logger.LogInformation( error.Description);
+                        ModelState.AddModelError("Password", error.Description);
+                    }
 
-            return View("Overview");
+                    return View("Overview", model);
+                }
+                
+                _logger.LogInformation( $"Deleted user {User.Identity!.Name}.");
+                await _signInManager.SignOutAsync();
 
+                foreach (var cookie in Request.Cookies.Keys.Where(key => key.Contains("AspNet")))
+                {
+                    Response.Cookies.Delete(cookie);
+                }
+
+                return RedirectToAction("Index", "Home");
+            }
+            
+            _logger.LogInformation("Incorrect password.");
+            ModelState.AddModelError("Password", "Incorrect password.");
+
+            return View("Overview", model);
         }
         
         [HttpPost]
-        public IActionResult ChangePassword(ChangePasswordViewModel model)
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
-            _logger.LogInformation( $"Changed password.");
+            var user = await _userManager.FindByNameAsync(User.Identity!.Name);
+            _logger.LogInformation( "Changed password.");
+            var result = await _userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
+            
+            if (result.Succeeded) return View();
 
-            return View();
+            foreach (var error in result.Errors)
+            {
+                _logger.LogInformation(error.Description);
+                ModelState.AddModelError("CurrentPassword", error.Description);
+            }
 
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

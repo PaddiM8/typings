@@ -9,7 +9,7 @@
 
 <h3>Delete account</h3>
 @model DeleteAccountViewModel
-<form asp-action="DeleteAccount" method="delete">
+<form asp-action="DeleteAccount" method="post">
     <label asp-for="Password"></label>
     <input asp-for="Password"/>
     <span asp-validation-for="Password" class="error"></span>
