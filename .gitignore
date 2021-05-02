@@ -2,3 +2,4 @@ bin/
 obj/
 wwwroot/dist/
 appsettings.json
+node_modules/
