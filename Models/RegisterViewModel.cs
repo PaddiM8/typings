@@ -1,11 +1,13 @@
 using System.ComponentModel.DataAnnotations;
 
+#nullable disable
 namespace Typings.Models
 {
     public class RegisterViewModel
     {
         [Required]
         [Display(Prompt = "Username...")]
+        [RegularExpression("[A-z0-9_-]+", ErrorMessage = "Username may only contain English letters, digits, underscores, and dashes.")]
         [StringLength(32, MinimumLength = 2, ErrorMessage = "Username length must be between {2} and {1}.")]
         public string Username { get; set; }
         

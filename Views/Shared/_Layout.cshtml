@@ -24,9 +24,18 @@
     <header>
         <h1 class="title"><a asp-controller="Home" asp-action="Index">typings</a></h1>
         <nav>
-            <a asp-controller="Account" asp-action="Login">Login</a>
-            /
-            <a asp-controller="Account" asp-action="Register">Register</a>
+            @if (Context.User.Identity?.IsAuthenticated ?? false)
+            {
+                <a asp-controller="Account" asp-action="Overview">@(Context.User.Identity.Name)</a>
+                <span>/</span>
+                <a asp-controller="Account" asp-action="Logout">Logout</a>
+            }
+            else
+            {
+                <a asp-controller="Account" asp-action="Login">Login</a>
+                <span>/</span>
+                <a asp-controller="Account" asp-action="Register">Register</a>
+            }
         </nav>
     </header>
     @RenderBody()

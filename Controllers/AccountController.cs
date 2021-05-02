@@ -3,26 +3,38 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Typings.Models;
 
 namespace Typings.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<AccountController> _logger;
 
-        public AccountController(ILogger<AccountController> logger)
+        public AccountController(UserManager<IdentityUser> userManager,
+                                 SignInManager<IdentityUser> signInManager,
+                                 ILogger<AccountController> logger)
         {
+            _userManager = userManager;
+            _signInManager = signInManager;
             _logger = logger;
         }
 
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
         
+        [AllowAnonymous]
         public IActionResult Register()
         {
             return View();
@@ -39,22 +51,61 @@ namespace Typings.Controllers
         }
         
         [HttpPost]
-        public IActionResult Login(LoginViewModel model)
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
-            _logger.LogInformation("Logged in as {model.Username}");
+            var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, true, true);
+            if (result.Succeeded)
+            {
+                _logger.LogInformation("Logged in as {model.Username}.");
+                
+                return RedirectToAction("Index", "Home");
+            }
 
-            return RedirectToAction("Index", "Home");
+            if (result.IsLockedOut)
+            {
+                _logger.LogInformation("Locked out.");
+                ModelState.AddModelError("Username", "Too many failed login attempts. Locked out.");
+
+                return View(model);
+            }
+            
+            _logger.LogInformation("Invalid login attempt.");
+            ModelState.AddModelError("Username", "Invalid login attempt.");
+
+            return View(model);
         }
         
         [HttpPost]
-        public IActionResult Register(RegisterViewModel model)
+        [AllowAnonymous]
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
-            _logger.LogInformation( $"Created user: {model.Username}, {model.Password}");
+            var user = new IdentityUser { UserName = model.Username };
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+                await _signInManager.SignInAsync(user, true);
+                _logger.LogInformation( $"Created user: {model.Username}.");
+
+                return RedirectToAction("Overview", "Account");
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("Username", error.Description);
+                _logger.LogInformation( $"Failed to create user: {error.Description}.");
+            }
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
 
             return RedirectToAction("Index", "Home");
-
         }
         
         [HttpDelete]

@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
+#nullable disable
 namespace Typings.Models
 {
     public class DeleteAccountViewModel

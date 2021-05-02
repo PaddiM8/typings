@@ -1,5 +1,6 @@
 using System;
 
+#nullable disable
 namespace Typings.Models
 {
     public class ErrorViewModel
