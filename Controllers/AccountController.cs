@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.Extensions.Logging;
+using Typings.Data;
 using Typings.Models;
 
 namespace Typings.Controllers
@@ -23,18 +24,21 @@ namespace Typings.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly ApplicationDbContext _db;
         private readonly IEmailSender _emailSender;
         private readonly IWebHostEnvironment _environment;
         private readonly ILogger<AccountController> _logger;
 
         public AccountController(UserManager<IdentityUser> userManager,
                                  SignInManager<IdentityUser> signInManager,
+                                 ApplicationDbContext db,
                                  IEmailSender emailSender,
                                  IWebHostEnvironment environment,
                                  ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _db = db;
             _emailSender = emailSender;
             _environment = environment;
             _logger = logger;
@@ -163,6 +167,11 @@ namespace Typings.Controllers
             if (result.Succeeded)
             {
                 _logger.LogInformation( $"Created user: {model.Username}.");
+                await _db.Users.AddAsync(new User
+                {
+                    Username = user.UserName
+                });
+                await _db.SaveChangesAsync();
                 
                 if (_environment.IsProduction())
                 {

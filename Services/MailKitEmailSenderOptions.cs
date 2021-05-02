@@ -1,7 +1,7 @@
 using MailKit.Security;
 
 #nullable disable
-namespace Typings.Email
+namespace Typings.Services
 {
     public class MailKitEmailSenderOptions
     {

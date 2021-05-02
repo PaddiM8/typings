@@ -17,7 +17,7 @@ namespace Typings.Areas.Identity
         {
             builder.ConfigureServices((context, services) =>
             {
-                string connectionString = context.Configuration.GetConnectionString(("UserContextConnection"));
+                var connectionString = context.Configuration.GetConnectionString(("UserContextConnection"));
                 services.AddDbContext<UserContext>(options =>
                     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 

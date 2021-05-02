@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 using MimeKit;
 using MimeKit.Text;
 
-namespace Typings.Email
+namespace Typings.Services
 {
     public class MailKitEmailSender : IEmailSender
     {
