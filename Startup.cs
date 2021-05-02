@@ -36,6 +36,11 @@ namespace Typings
                 options.SignIn.RequireConfirmedAccount = false;
                 options.SignIn.RequireConfirmedPhoneNumber = false;
             });
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = "/";
+                options.LoginPath = "/Account/Login";
+            });
             services.AddControllersWithViews();
         }
 
