@@ -1,0 +1,20 @@
+@{
+    ViewData["Title"] = "Confirm your email";
+    Layout = "_Layout";
+}
+
+<main class="status">
+    <h2>Please confirm your email address</h2>
+    @if (_env.IsProduction())
+    {
+        <p>An email has been sent to your inbox. Click the link in the email in order to confirm your address.</p>
+        <a asp-action="ResendConfirmationEmail">Resend confirmation email</a>
+    }
+    else
+    {
+        <a asp-controller="Account"
+           asp-action="ConfirmEmail"
+           asp-route-userid="@ViewData["userId"]"
+           asp-route-code="@ViewData["code"]">Click here to confirm your account.</a>
+    }
+</main>

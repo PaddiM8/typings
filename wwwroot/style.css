@@ -118,6 +118,10 @@ form input[type="submit"] {
   color: red;
 }
 
+.success {
+  color: var(--primary-color);
+}
+
 form .error {
   font-size: 0.8em;
   margin-bottom: 0.5rem;

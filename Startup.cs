@@ -32,15 +32,17 @@ namespace Typings
                 options.Password.RequiredLength = 6;
                 options.Password.RequiredUniqueChars = 1;
                 options.Password.RequireNonAlphanumeric = false;
-                options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedEmail = true;
                 options.SignIn.RequireConfirmedAccount = false;
                 options.SignIn.RequireConfirmedPhoneNumber = false;
             });
+            
             services.ConfigureApplicationCookie(options =>
             {
                 options.AccessDeniedPath = "/";
                 options.LoginPath = "/Account/Login";
             });
+            
             services.AddControllersWithViews();
         }
 

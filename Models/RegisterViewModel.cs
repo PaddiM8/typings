@@ -12,6 +12,11 @@ namespace Typings.Models
         public string Username { get; set; }
         
         [Required]
+        [Display(Prompt = "Email address...")]
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+        
+        [Required]
         [Display(Prompt = "Password...")]
         [DataType(DataType.Password)]
         [StringLength(512, MinimumLength = 6, ErrorMessage = "Password must be at least {2} characters long.")]

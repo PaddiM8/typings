@@ -1,0 +1,21 @@
+@{
+    ViewData["Title"] = "Resend confirmation email";
+    Layout = "_Layout";
+}
+
+<main class="status">
+    <h2>Resend confirmation email</h2>
+    @if (!string.IsNullOrEmpty((string)ViewData["Message"]))
+    {
+        <h3 class="success">@ViewData["Message"]</h3>
+    }
+    
+    @model EmailViewModel
+    <form asp-action="ResendConfirmationEmail" method="post">
+        <label asp-for="Email"></label>
+        <input asp-for="Email"/>
+        <span asp-validation-for="Email" class="error"></span>
+        
+        <input type="submit" value="Resend"/>
+    </form>
+</main>
