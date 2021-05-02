@@ -240,6 +240,17 @@ function showResult() {
   }
   let wpm = Math.floor(words / minute);
   document.querySelector('#right-wing').innerHTML = `WPM: ${wpm} / ACC: ${acc}`;
+  uploadResult(wpm, acc);
+}
+
+function uploadResult(wpm, accuracy) {
+  fetch('/TypeTest', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    },
+    body: JSON.stringify({ wpm, accuracy })
+  });
 }
 
 // Command actions

@@ -1,4 +1,6 @@
+using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Typings.Data;
 
 namespace Typings.Services
@@ -6,21 +8,25 @@ namespace Typings.Services
     public class TypeTestService
     {
         private readonly ApplicationDbContext _db;
+
+        private readonly ILogger<TypeTestService> _logger;
         
-        public TypeTestService(ApplicationDbContext db)
+        public TypeTestService(ApplicationDbContext db, ILogger<TypeTestService> logger)
         {
             _db = db;
+            _logger = logger;
         }
         
         public async Task Add(string username, int wpm, int accuracy)
         {
             var user = await _db.Users.FindAsync(username);
+            _logger.LogInformation($"Creating test result: {username}, {wpm.ToString()}, {accuracy.ToString()}");
             user.TestResults.Add(new TestResult
             {
-                AuthorUsername = username,
                 Wpm = wpm,
                 Accuracy = accuracy
             });
+            await _db.SaveChangesAsync();
         }
     }
 }

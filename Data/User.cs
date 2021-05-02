@@ -13,7 +13,7 @@ namespace Typings.Data
         
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime CreationDate { get; set; }
-        
-        public List<TestResult> TestResults { get; set; }
+
+        public List<TestResult> TestResults { get; set; } = new();
     }
 }
