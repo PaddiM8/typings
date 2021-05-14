@@ -13,7 +13,6 @@ const options = {
         data: testResults.map(x => [x.date, x.wpm])
     }],
     chart: {
-        width: testResults.length * 10,
         height: 350,
         type: 'line',
         id: 'wpm-chart',
@@ -40,8 +39,8 @@ const options = {
         align: 'left'
     },
     xaxis: {
-        type: 'datetime',
-        tickAmount: 12,
+	type: 'datetime',
+        tickAmount: 8,
         min: new Date(testResults[0].date).getTime(),
         max: new Date(testResults[testResults.length - 1].date).getTime(),
         labels: {

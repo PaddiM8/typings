@@ -34,27 +34,6 @@ namespace Typings.Services
 
         public IEnumerable<TestResult> GetAll(string username)
         {
-            var tests = new List<TestResult>();
-            var rnd = new Random();
-            var date = DateTime.Now;
-            int day = 0;
-            for (double i = 0; i < 100; i += 0.25)
-            {
-                tests.Add(new TestResult
-                {
-                    Wpm = rnd.Next(60, 110),
-                    Accuracy = rnd.Next(5, 100),
-                    Date = date.AddDays(day),
-                });
-                Console.WriteLine(date.AddDays(day));
-
-                day++;
-            }
-
-            _db.Users.Find(username).TestResults.RemoveAll(x => true);
-            _db.Users.Find(username).TestResults.AddRange(tests);
-            _db.SaveChanges();
-
             var user = _db.Users
                 .Where(x => x.Username == username)
                 .Include(u => u.TestResults)
