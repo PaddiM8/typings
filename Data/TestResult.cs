@@ -14,6 +14,9 @@ namespace Typings.Data
         
         public int Accuracy { get; set; }
         
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime Date { get; set; }
+        
         [ForeignKey("Author")]
         public string AuthorUsername { get; set; }
         public User Author { get; set; }

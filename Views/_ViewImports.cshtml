@@ -2,7 +2,11 @@
 @using Microsoft.AspNetCore.Hosting
 @using Microsoft.Extensions.Hosting
 @using Microsoft.AspNetCore.Identity
+@using Typings.Data
 @using Typings.Models
+@using Typings.Services
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @inject IWebHostEnvironment _env
 @inject UserManager<IdentityUser> _userManager;
+@inject TypeTestService _typeTestService;
+@inject ApplicationDbContext _db;

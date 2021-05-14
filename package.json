@@ -17,6 +17,11 @@
   },
   "homepage": "https://github.com/briano1905/typings#readme",
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^18.0.0",
+    "@rollup/plugin-node-resolve": "^11.2.1",
     "rollup": "^2.46.0"
+  },
+  "dependencies": {
+    "apexcharts": "^3.26.1"
   }
 }

@@ -26,15 +26,17 @@
         <nav>
             @if (Context.User.Identity?.IsAuthenticated ?? false)
             {
+                <a asp-controller="Account" asp-action="Stats">stats</a>
+                <span>/</span>
                 <a asp-controller="Account" asp-action="Overview">@(Context.User.Identity.Name)</a>
                 <span>/</span>
-                <a asp-controller="Account" asp-action="Logout">Logout</a>
+                <a asp-controller="Account" asp-action="Logout">logout</a>
             }
             else
             {
-                <a asp-controller="Account" asp-action="Login">Login</a>
+                <a asp-controller="Account" asp-action="Login">login</a>
                 <span>/</span>
-                <a asp-controller="Account" asp-action="Register">Register</a>
+                <a asp-controller="Account" asp-action="Register">register</a>
             }
         </nav>
     </header>
@@ -49,9 +51,9 @@
         <div id="show-themes" class="button" onClick="showThemeCenter(true);" tabindex="4">themes</div>
     </footer>
 
-    @if ((string) ViewData["Title"] == "typings")
+    @if (!string.IsNullOrEmpty((string)ViewData["OverrideScript"]))
     {
-        <script src="~/dist/index.js"></script>
+        <script src="@ViewData["OverrideScript"]"></script>
     }
     else
     {

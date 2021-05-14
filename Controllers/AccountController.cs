@@ -56,6 +56,11 @@ namespace Typings.Controllers
             return View();
         }
         
+        public IActionResult Stats()
+        {
+            return View();
+        }
+        
         public IActionResult Overview()
         {
             return View();

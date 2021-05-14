@@ -4,8 +4,8 @@
 }
 
 <h3>Information</h3>
-<strong>Username: </strong> Foo
-<strong>Creation date: </strong> 01/01/1970
+<strong>Username: </strong> @(Context.User.Identity!.Name)
+<strong>Creation date: </strong> @((await _db.Users.FindAsync(Context.User.Identity!.Name)).CreationDate.ToString("dd-MM-yyyy"))
 
 <h3>Delete account</h3>
 @model DeleteAccountViewModel

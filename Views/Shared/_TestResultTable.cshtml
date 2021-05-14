@@ -1,0 +1,16 @@
+@model IEnumerable<TestResult>
+<table>
+    <tr>
+        <th>WPM</th>
+        <th>Accuracy</th>
+        <th>Date</th>
+    </tr>
+    @foreach (var testResult in Model)
+    {
+        <tr>
+            <td>@(testResult.Wpm.ToString())</td>
+            <td>@(testResult.Accuracy.ToString())</td>
+            <td>@(testResult.Date.ToString("dd-MM-yyyy"))</td>
+        </tr>
+    }
+</table>

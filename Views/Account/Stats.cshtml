@@ -1,0 +1,45 @@
+@{
+    ViewData["Title"] = "Stats";
+    ViewData["OverrideScript"] = "/dist/stats.js";
+    Layout = "_Layout";
+}
+
+<main class="stats">
+    <h2>Stats</h2>
+
+    <h3>Chart</h3>
+    <div id="chart"></div>
+
+    @{
+        var bestResults = _typeTestService.GetBest(Context.User.Identity!.Name!, 3);
+        var recentResults = _typeTestService.GetMany(Context.User.Identity!.Name!, 10);
+    }
+
+    <h3>Best results</h3>
+    @if (bestResults.Any())
+    {
+        <partial name="_TestResultTable" model="@bestResults" />
+    }
+    else
+    {
+        <i>Nothing here.</i>
+    }
+
+    <h3>Recent results</h3>
+    @if (bestResults.Any())
+    {
+        <partial name="_TestResultTable" model="@recentResults" />
+    }
+    else
+    {
+        <i>Nothing here.</i>
+    }
+</main>
+<script>
+    const G_TEST_RESULTS = [
+        @foreach (var testResult in _typeTestService.GetAll(Context.User.Identity!.Name!))
+        {
+            <text>{ wpm: @testResult.Wpm, accuracy: @testResult.Accuracy, date: '@testResult.Date.ToString()' },</text>
+        }
+    ];
+</script>

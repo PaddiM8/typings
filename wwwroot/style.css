@@ -54,6 +54,14 @@ header nav > a {
   text-decoration: none;
 }
 
+table th {
+  text-align: left;
+}
+
+table th, td {
+  padding: 0 0.8rem;
+}
+
 main {
   width: 100%;
   margin: 0 0.4rem;
@@ -80,6 +88,13 @@ main h2 {
   background-color: transparent;
   margin: 0;
   padding: 0;
+}
+
+#chart {
+  min-height: 300px;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 main.login, main.register {
@@ -198,7 +213,7 @@ form .error {
   padding: 0.4rem 1rem;
   border-radius: 0.2rem;
 
-  color: var(--text-color);
+  color: var(--background-color);
   font: inherit;
   font-size: 1em;
   cursor: pointer;
