@@ -71,7 +71,8 @@ namespace Typings.Controllers
             return View();
         }
 
-        public IActionResult EmailConfirmedSuccessFully()
+        [AllowAnonymous]
+        public IActionResult EmailConfirmedSuccessfully()
         {
             return View();
         }
@@ -239,9 +240,9 @@ namespace Typings.Controllers
 
             if (_environment.IsProduction())
             {
-                var callbackUrl = Url.Page(
-                    "/Account/ResetPassword",
-                    null,
+                var callbackUrl = Url.Action(
+                    "ResetPassword",
+                    "Account",
                     new { userId, code },
                     Request.Scheme);
                 
@@ -339,6 +340,7 @@ namespace Typings.Controllers
             return View(model);
         }
         
+	[AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
@@ -349,11 +351,7 @@ namespace Typings.Controllers
         {
             var userId = await _userManager.GetUserIdAsync(user);
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            var callbackUrl = Url.Page(
-                "/Account/ConfirmEmail",
-                null,
-                new { userId, code },
-                Request.Scheme);
+	    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId, code }, Request.Scheme);
 
             await _emailSender.SendEmailAsync(user.Email, "Confirm your email",
                 $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
