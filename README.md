@@ -1,12 +1,12 @@
 # typings
 
-<a href="https://typings.gg" target="_blank">typings.gg</a> is a sleek and modern typing test website. it supports many custom themes
+<a href="https://typings.strct.net" target="_blank">typings.strct.net</a> is a sleek and modern typing test website. it supports many custom themes
+
+**Note**: This is a fork of <a href="https://typings.gg">typings.gg</a>, with an added login/registration system and statistics.
 
 ![typings.gg](typings-screen-shot.png)
 
 ## theme
-
-type the theme code for example `dracula` in the text box then hit [ windows: <kbd>alt</kbd> + <kbd>t</kbd> ], [ mac: <kbd>cmd</kbd> + <kbd>ctrl</kbd> + <kbd>t</kbd> ], [ linux: <kbd>super</kbd> + <kbd>ctrl</kbd> + <kbd>t</kbd> or <kbd>alt</kbd> + <kbd>t</kbd> ]
 
 available themes:
 
@@ -97,7 +97,3 @@ in this menu you can see all the available themes to choose from, along with a s
 wpm: total number of characters (including spaces) of words you got right divided by five then divided by the time starting from first character typed
 
 acc: total number of characters (including spaces) of words you got right divided by all character in the list of words
-
-## support
-
-- <a href="https://www.paypal.me/briano1905" target="_blank">PayPal</a>
